@@ -15,6 +15,10 @@ data = pickle.load( open( "smart-reply-data.pkl", "rb" ) )
 words = data['words']
 classes = data['classes']
 #response = data['']
+# import our intents file
+import json
+with open('intents.json') as json_data:
+    intents = json.load(json_data)
 
 def clean_up_sentence(sentence):
     # tokenize the pattern
@@ -38,48 +42,16 @@ def bow(sentence, words, show_details=True):
 
     return(np.array(bag))
 
-p = bow("I am very disappointed with Zomato.", words)
-print (p)
-print (classes)
 
-# Use pickle to load in the pre-trained model
-global graph
-graph = tf.compat.v1.get_default_graph()
-
-# with open(f'smart-reply-model.pkl', 'rb') as f:
-#     model = pickle.load(f)
 
 model = tf.keras.models.load_model('models/smartmodel')
-def classify_local(sentence):
-    ERROR_THRESHOLD = 0.25
-    
-    # generate probabilities from the model
-    input_data = pd.DataFrame([bow(sentence, words)], dtype=float, index=['input'])
-    results = model.predict([input_data])[0]
-    # filter out predictions below a threshold, and provide intent index
-    results = [[i,r] for i,r in enumerate(results) if r>ERROR_THRESHOLD]
-    # sort by strength of probability
-    results.sort(key=lambda x: x[1], reverse=True)
-    return_list = []
-    for r in results:
-        return_list.append((classes[r[0]], str(r[1])))
-    # return tuple of intent and probability
-    return return_list
-
-print(classify_local('Hello, good day!'))
-classify_local('How you can assist me?')
-classify_local('Get me to adverse medicine form')
-classify_local('Place to log blood pressure')
-classify_local('Fetch blood result for patient')
-classify_local('Blood pressure monitoring in hospital')
-classify_local('Look for hospital to monitor blood pressure')
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route("/api/v1/smartreply", methods=['POST'])
 def classify():
-    ERROR_THRESHOLD = 0.25
+    ERROR_THRESHOLD = 0.20
     
     sentence = request.json['sentence']
     
@@ -88,11 +60,15 @@ def classify():
     results = model.predict([input_data])[0]
     # filter out predictions below a threshold
     results = [[i,r] for i,r in enumerate(results) if r>ERROR_THRESHOLD]
-    # sort by strength of probability
+    replies = []
     results.sort(key=lambda x: x[1], reverse=True)
+    
     return_list = []
     for r in results:
-        return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
+        for intent in intents['intents']:
+            if intent['tag'] in classes[r[0]]:
+                replies.append(intent['responses'])
+        return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": replies})
     # return tuple of intent and probability
     
     response = jsonify(return_list)
@@ -100,5 +76,6 @@ def classify():
 
 # running REST interface
 if __name__ == "__main__":
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
+
 

@@ -24,13 +24,13 @@
                 "Awesome, thanks", "Best outlet. Best pizza's in town. Tasty and delicious. Properly baked. Love the toppings. So hygienic and so fresh.",
         "The quality they serve is excellent. I really love this outlet.", "amazing food", "Pizzas from them are the best. I had Farmhouse pizza , supreme onion pizza , country special , cheesy pizza , chicken tikka pizza like many to tell you guys but do try them out and sorry for the picture it's a little blur but go for the taste it's damn good.",
         "It's a budget friendly MNC to have pizza ,it provides pizzas with a variety of range .I had wide spectrum of pizzas and ranging from budget friendly to luxurious. Talking about the quality of food,it's amazing.",
-        ""],
+        "Best restaurant", "Awesome restaurant", "Very delicious food"],
          "responses": ["Thank you for your support. Happy to help!", "Thank you very much.", "Hi, Thanks for this wonderful review. Cheers :)", "Thank you for the kind review :)"],
          "context": [""]
         },
         {"tag": "spam",
          "patterns": ["This is really a fake app", "Don't download fake app"],
-         "responses": [],
+         "responses": ["Hi there, how can we help you?"],
          "context": [""]
         },
         {"tag": "support",
