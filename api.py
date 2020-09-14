@@ -28,7 +28,7 @@ def clean_up_sentence(sentence):
     return sentence_words
 
 # return bag of words array: 0 or 1 for each word in the bag that exists in the sentence
-def bow(sentence, words, show_details=True):
+def bow(sentence, words, show_details=False):
     # tokenize the pattern
     sentence_words = clean_up_sentence(sentence)
     # bag of words
