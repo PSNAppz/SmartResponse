@@ -37,9 +37,6 @@ def bow(sentence, words, show_details=False):
         for i,w in enumerate(words):
             if w == s: 
                 bag[i] = 1
-                if show_details:
-                    print ("found in bag: %s" % w)
-
     return(np.array(bag))
 
 
@@ -51,7 +48,7 @@ CORS(app)
 
 @app.route("/api/v1/smartreply", methods=['POST'])
 def classify():
-    ERROR_THRESHOLD = 0.20
+    ERROR_THRESHOLD = 0.30
     
     sentence = request.json['sentence']
     
@@ -69,8 +66,10 @@ def classify():
             if intent['tag'] in classes[r[0]]:
                 replies.append(intent['responses'])
         return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": replies})
+        pass
     # return tuple of intent and probability
-    
+    response_list = []
+    response_list.append(return_list[0])
     response = jsonify(return_list)
     return response
 
