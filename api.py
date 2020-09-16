@@ -61,15 +61,16 @@ def classify():
     results.sort(key=lambda x: x[1], reverse=True)
     
     return_list = []
+    
     for r in results:
         for intent in intents['intents']:
             if intent['tag'] in classes[r[0]]:
-                replies.append(intent['responses'])
-        return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": replies})
-        pass
+                print(classes[r[0]], classes[r[0]])
+                replies.append(intent['responses'])  
+                return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": intent['responses']})
+        break # Comment this to limit responses to 1 intent prediction
+
     # return tuple of intent and probability
-    response_list = []
-    response_list.append(return_list[0])
     response = jsonify(return_list)
     return response
 
