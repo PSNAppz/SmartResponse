@@ -1,11 +1,12 @@
-import nltk
-from nltk.stem.lancaster import LancasterStemmer
-stemmer = LancasterStemmer()
+import random
+import pickle
+import re
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
-
-import pickle
+import nltk
+from nltk.stem.lancaster import LancasterStemmer
+stemmer = LancasterStemmer()
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -50,7 +51,12 @@ CORS(app)
 def classify():
     ERROR_THRESHOLD = 0.30
     
+    # Initialise vars
+    EMAIL = "support@example.com"
+    PHONE = "99999999999"
+    WEBSITE = "https://example.com"
     sentence = request.json['sentence']
+    USER = request.json['username']
     
     # generate probabilities from the model
     input_data = pd.DataFrame([bow(sentence, words)], dtype=float, index=['input'])
@@ -65,9 +71,12 @@ def classify():
     for r in results:
         for intent in intents['intents']:
             if intent['tag'] in classes[r[0]]:
-                print(classes[r[0]], classes[r[0]])
-                replies.append(intent['responses'])  
-                return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": intent['responses']})
+                replies.append(list(np.random.choice(intent['responses'], 3, replace=False)))
+                crafted_replies = [re.sub(r'{user}', USER, reply) for reply in replies[0]]
+                crafted_replies = [re.sub(r'{phone}', PHONE, reply) for reply in crafted_replies]
+                crafted_replies = [re.sub(r'{email}', EMAIL, reply) for reply in crafted_replies]
+                crafted_replies = [re.sub(r'{website}', WEBSITE, reply) for reply in crafted_replies]
+                return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": crafted_replies})
         break # Comment this to limit responses to 1 intent prediction
 
     # return tuple of intent and probability

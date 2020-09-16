@@ -2,7 +2,7 @@
         {"tag": "neutral",
          "patterns": ["The taste was very good. But the crust could be more crispy.both the pizza were good and the toppings were delicious too. I enjoyed both of them.", 
         ""],
-         "responses": ["Hello, thanks for sharing your opinion. We'll try our best to improve our service", "Thank you so much for the review.", "Thank you for the review", "Dear Customer, Thank you for your suggestions. We will try and incorporate them."],
+         "responses": ["Hello {user}, thanks for sharing your opinion. We'll try our best to improve our service", "Thank you so much for the review.", "Dear {user}, thank you for the review.", "Dear {user}, Thank you for your suggestions. We will try and incorporate them."],
          "context": [""]
         },
         {"tag": "negative",
@@ -22,7 +22,7 @@
         "They give the delivery guy 2 orders, for 2 different locations far from each others, and if your order is second to be delivered, so ur food willbe cold by the time it reaches you.",
         "Don't buy food with online transaction, better to go for cash on delivery. Zomato Team is not giving proper response for failed transactions.",
         "The pizza's were hopeless they are looking too messy and Packing was very poor and the taste of pizza was horrible. The presentation of the pizza was horrible and hopeless. We find a hair on the pizza and the jalapeno dip was also fermented."],
-         "responses": ["Hey! We sincerely apologise for the inconvenience caused.", "Hi, sorry for the inconvenience caused. Can you please share the details of the issue?", "Hey, this doesn't sound right. Please call us or visit our website to share more details with us. We will look into it and work on resolving it at the earliest. Thank you."],
+         "responses": ["Hey {user}! We sincerely apologise for the inconvenience caused.", "Hi {user}, sorry for the inconvenience caused. Can you please share the details of the issue?", "Hey {user}, this doesn't sound right. Please call us or visit our website at {website} to share more details with us. We will look into it and work on resolving it at the earliest. Thank you."],
          "context": [""]
         },
         {"tag": "positive",
@@ -32,17 +32,17 @@
         "The quality they serve is excellent. I really love this outlet.", "amazing food", "Pizzas from them are the best. I had Farmhouse pizza , supreme onion pizza , country special , cheesy pizza , chicken tikka pizza like many to tell you guys but do try them out and sorry for the picture it's a little blur but go for the taste it's damn good.",
         "It's a budget friendly MNC to have pizza ,it provides pizzas with a variety of range .I had wide spectrum of pizzas and ranging from budget friendly to luxurious. Talking about the quality of food,it's amazing.",
         "Best restaurant", "Awesome restaurant", "Very delicious food"],
-         "responses": ["Thank you for your support. Happy to help!", "Thank you very much.", "Hi, Thanks for this wonderful review. Cheers :)", "Thank you for the kind review :)"],
+         "responses": ["Thank you for your support {user}. Happy to help!", "Thank you very much {user}.", "Hi {user}, thanks for the wonderful review. Cheers :)", "Thank you for the kind review :)"],
          "context": [""]
         },
         {"tag": "spam",
          "patterns": ["This is really a fake app", "Don't download fake app"],
-         "responses": ["Hi there, how can we help you?"],
+         "responses": ["Hi {user}, how can we help you?"],
          "context": [""]
         },
         {"tag": "support",
          "patterns": ["I need support", "I would like to contact support", "Customercare contact" ],
-         "responses": ["Hi there, how can we help you?", "Please contact us through email or phone.", "Hi, sorry for the inconvenience caused. Can you please share the details of the issue?"],
+         "responses": ["Hi {user}, how can we help you?", "Dear {user}, please contact us via email {email} or phone {phone}.", "Hi {user}, sorry for the inconvenience caused. Can you please share the details of your issue?"],
          "context": [""]
         }
    ]
