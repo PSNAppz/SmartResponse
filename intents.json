@@ -22,7 +22,11 @@
         "They give the delivery guy 2 orders, for 2 different locations far from each others, and if your order is second to be delivered, so ur food willbe cold by the time it reaches you.",
         "Don't buy food with online transaction, better to go for cash on delivery. Zomato Team is not giving proper response for failed transactions.",
         "The pizza's were hopeless they are looking too messy and Packing was very poor and the taste of pizza was horrible. The presentation of the pizza was horrible and hopeless. We find a hair on the pizza and the jalapeno dip was also fermented."],
-         "responses": ["Hey {user}! We sincerely apologise for the inconvenience caused.", "Hi {user}, sorry for the inconvenience caused. Can you please share the details of the issue?", "Hey {user}, this doesn't sound right. Please call us or visit our website at {website} to share more details with us. We will look into it and work on resolving it at the earliest. Thank you."],
+         "responses": ["Hi {user}, we realize your experience hasn't been at par with your expectations. However, we'd like to learn more about your situation and what exactly happened. Contact us via: {website} with the specific transaction ID. We want to make things right for you.",
+                "Hi there, we understand your concern. We are sorry that you had to go through this. We request you to contact us via: {website} and we'll look into it.",
+                "Hi {user}, we apologize for the inconvenience caused. Request you to share thedetails here or you could reply to the same ticket raised via the app. We'll surely get this checked for you. Thanks.",
+                "Sorry to hear that, {user}. We're here to assist you. Request you to share the details via email {email}. We assure you to get it resolved at the earliest.",
+                 "Hey {user}! We sincerely apologise for the inconvenience caused.", "Hi {user}, sorry for the inconvenience caused. Can you please share the details of the issue?","Hi {user}, we would like to know what went wrong and fix the issue. Please raise your concern by clicking on the link: {website}, so that we can look into it immediately. It is our constant endeavor to provide seamless experience to all our users." , "Hey {user}, this doesn't sound right. Please call us or visit our website at {website} to share more details with us. We will look into it and work on resolving it at the earliest. Thank you."],
          "context": [""]
         },
         {"tag": "positive",
