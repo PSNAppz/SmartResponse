@@ -55,8 +55,12 @@ def classify():
     EMAIL = "support@example.com"
     PHONE = "99999999999"
     WEBSITE = "https://example.com"
-    sentence = request.json['sentence']
-    USER = request.json['username']
+    try:
+        sentence = request.json['sentence']
+        USER = request.json['username']
+    except Exception as e:
+        response = {"Error please add ":str(e)}
+        return response
     
     # generate probabilities from the model
     input_data = pd.DataFrame([bow(sentence, words)], dtype=float, index=['input'])
