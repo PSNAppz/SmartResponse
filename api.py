@@ -45,6 +45,34 @@ model = tf.keras.models.load_model('models/smartmodel')
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/api/v1/addresponse", methods=['POST'])
+def add_response():
+    data={}
+    data['intents']=[]
+    data['intents'].append({
+        'tag': 'tag',
+        'patterns': 'patterns',
+        'responses': 'responses'
+    })
+
+    tag = request.json['tag']
+    new_response = request.json['response']
+    for intent in intents['intents']:
+        if intent['tag'] in tag:
+            if new_response in intent['responses']:
+                response = {"success":False,"message":"Response already found in the training data"}
+                return response
+            else:
+                
+                print("updating file")
+                intent['responses'].append(new_response)
+                data = intents
+                with open('intents.json', 'w') as training:
+                    json.dump(data, training)    
+                    
+    response = {"success":True,"message":"New response added!"}
+    return response
+
 @app.route("/api/v1/update", methods=['POST'])
 def train_model():
     data={}
@@ -52,7 +80,7 @@ def train_model():
     data['intents'].append({
         'tag': 'tag',
         'patterns': 'patterns',
-        'response': 'response'
+        'responses': 'responses'
     })
 
     tag = request.json['tag']
