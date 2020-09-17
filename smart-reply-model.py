@@ -80,7 +80,8 @@ train_x = list(training[:,0])
 train_y = list(training[:,1])
 
 # Create model - 3 layers. First layer 128 neurons, second layer 64 neurons and 3rd output layer contains number of neurons
-# equal to number of intents to predict output intent with softmax
+# equal to number of intents to predict output intent with softmax. We use the Keras sequential API for this. After training the model for 200 epochs
+
 model = Sequential()
 model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
 model.add(Dropout(0.5))
