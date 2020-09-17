@@ -51,13 +51,17 @@ CORS(app)
 def classify():
     ERROR_THRESHOLD = 0.30
     
-    # Initialise vars
-    EMAIL = "support@example.com"
-    PHONE = "99999999999"
-    WEBSITE = "https://example.com"
+    USER = ''
+    EMAIL = ''
+    PHONE = ''
+    WEBSITE = ''
+    
     try:
         sentence = request.json['sentence']
         USER = request.json['username']
+        EMAIL = request.json['email']
+        PHONE = request.json['phone']
+        WEBSITE = request.json['website']
     except Exception as e:
         response = {"Error please add ":str(e)}
         return response
