@@ -151,7 +151,7 @@ def classify():
                 crafted_replies = [re.sub(r'{email}', EMAIL, reply) for reply in crafted_replies]
                 crafted_replies = [re.sub(r'{website}', WEBSITE, reply) for reply in crafted_replies]
                 return_list.append({"intent": classes[r[0]], "probability": str(r[1]), "responses": crafted_replies})
-        break # Comment this to limit responses to 1 intent prediction
+        break # Uncomment this to remove limit responses to 1 intent prediction
 
     # return tuple of intent and probability
     response = jsonify(return_list)
