@@ -45,8 +45,42 @@ model = tf.keras.models.load_model('models/smartmodel')
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/api/v1/update", methods=['POST'])
+def train_model():
+    print("TEST")
+    data={}
+    data['intents']=[]
+    data['intents'].append({
+        'tag': 'tag',
+        'patterns': 'patterns',
+        'response': 'response'
+    })
+    response = {"success":False,"message":"Tag not found"}
+    tag = request.json['tag']
+    new_pattern = request.json['pattern']
+    for intent in intents['intents']:
+        print("WHY not", tag, intent['tag'])
+        if intent['tag'] in tag:
+            print("TEST221")                    
+            if new_pattern in intent['patterns']:
+                print("TESTfalse")
+                response = {"success":False,"message":"Pattern already found in the training data"}
+                return response
+            else:
+                
+                print("updating file")
+                intent['patterns'].append(new_pattern)
+                data = intents
+                with open('intents.json', 'w') as training:
+                    json.dump(data, training)
+                import training
+                response = {"success":True,"message":"Model training finished, new model is being used"}
+                
+    return response
+
 @app.route("/api/v1/addresponse", methods=['POST'])
 def add_response():
+    print("TEST")
     data={}
     data['intents']=[]
     data['intents'].append({
@@ -72,35 +106,6 @@ def add_response():
                     
     response = {"success":True,"message":"New response added!"}
     return response
-
-@app.route("/api/v1/update", methods=['POST'])
-def train_model():
-    data={}
-    data['intents']=[]
-    data['intents'].append({
-        'tag': 'tag',
-        'patterns': 'patterns',
-        'response': 'response'
-    })
-
-    tag = request.json['tag']
-    pattern = request.json['pattern']
-    for intent in intents['intents']:
-        if intent['tag'] in tag:
-            if pattern in intent['patterns']:
-                response = {"success":False,"message":"Pattern already found in the training data"}
-                return response
-            else:
-                
-                print("updating file")
-                intent['patterns'].append(pattern)
-                data = intents
-                with open('intents.json', 'w') as training:
-                    json.dump(data, training)    
-    import training
-    response = {"success":True,"message":"Model training finished, new model is being used"}
-    return response
-
 
 @app.route("/api/v1/smartreply", methods=['POST'])
 def classify():
