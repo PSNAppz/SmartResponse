@@ -85,7 +85,8 @@
                 "Hi {user}, how can we help you?",
                 "Hi, please tell us your concern.",
                 "Please let us know how we can help you",
-                "Hi {user}, please call {phone} or write to us at {email}."
+                "Hi {user}, please call {phone} or write to us at {email}.",
+                "Hello {user}, please specify your concern"
             ],
             "context": [
                 ""
