@@ -13,7 +13,7 @@
 #### Training the A.I Model
 
 - Update the `intents.json` file with new training data
-- Run `python smart-reply-model.py`
+- Run `python training.py`
 - Model file will be generated and will be saved as `smart-reply-data.pkl`
 - Thats it!
 
