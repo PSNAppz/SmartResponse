@@ -52,7 +52,7 @@ def add_response():
     data['intents'].append({
         'tag': 'tag',
         'patterns': 'patterns',
-        'responses': 'responses'
+        'response': 'response'
     })
 
     tag = request.json['tag']
@@ -80,7 +80,7 @@ def train_model():
     data['intents'].append({
         'tag': 'tag',
         'patterns': 'patterns',
-        'responses': 'responses'
+        'response': 'response'
     })
 
     tag = request.json['tag']
